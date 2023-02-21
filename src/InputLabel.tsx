@@ -22,7 +22,7 @@ function createLabel(nameVal: string, labelVal: string | undefined): string {
   return newLabel;
 }
 
-interface GeneralLabelProps {
+export interface InputLabelProps {
   id: string;
   name: string;
   label?: string;
@@ -31,7 +31,7 @@ interface GeneralLabelProps {
   }
 }
 
-export function InputLabel({ id, name, label, styles }: GeneralLabelProps) {
+export function InputLabel({ id, name, label, styles }: InputLabelProps) {
   return (
     <label className={styles.label} htmlFor={id}>
       {createLabel(name, label)}

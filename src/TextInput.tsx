@@ -1,11 +1,11 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import { InputLabel } from './InputLabel';
 
-interface PrevState {
+export interface TextInputPrevState {
   [key: string]: string;
 }
 
-interface TextInputStyles {
+export interface TextInputStyles {
   div: string;
   label: string;
   input: string;
@@ -15,7 +15,7 @@ export interface TextInputProps {
   name: string;
   id: string;
   curState: string;
-  raiseState: Dispatch<SetStateAction<PrevState>>;
+  raiseState: Dispatch<SetStateAction<TextInputPrevState>>;
   label?: string;
   placeholder?: string;
   styles: TextInputStyles;
@@ -34,7 +34,7 @@ export function TextInput({
 }: TextInputProps) {
   function changeHandler(event: React.ChangeEvent<HTMLInputElement>): void {
     event.preventDefault();
-    raiseState((prevState: PrevState) => ({
+    raiseState((prevState: TextInputPrevState) => ({
       ...prevState,
       [name]: event.target.value,
     }));
