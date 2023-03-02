@@ -6,9 +6,9 @@ export interface TextInputPrevState {
 }
 
 export interface TextInputStyles {
-  div: string;
-  label: string;
-  input: string;
+  div?: string;
+  label?: string;
+  input?: string;
 }
 
 export interface TextInputProps {
@@ -18,7 +18,7 @@ export interface TextInputProps {
   raiseState: Dispatch<SetStateAction<TextInputPrevState>>;
   label?: string;
   placeholder?: string;
-  styles: TextInputStyles;
+  styles?: TextInputStyles;
   disabled?: boolean;
 }
 
@@ -27,7 +27,7 @@ export function TextInput({
   id,
   label,
   placeholder,
-  styles = { div: '', label: '', input: '' },
+  styles,
   curState,
   raiseState,
   disabled,
@@ -41,18 +41,18 @@ export function TextInput({
   }
 
   return (
-    <div className={styles.div}>
+    <div className={styles?.div}>
       <InputLabel
         id={id}
         name={name}
         label={label}
         styles={{
-          label: styles.label,
+          label: styles?.label,
         }}
       />
       <input
         onChange={changeHandler}
-        className={`${styles.input} focus:outline-none focus:shadow-outline`}
+        className={`${styles?.input} focus:outline-none focus:shadow-outline`}
         type="text"
         id={id}
         name={name}
