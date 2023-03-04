@@ -6,3 +6,4 @@ export {
 } from './TextInput';
 export { InputLabel, InputLabelProps } from './InputLabel';
 export { createLabel } from './utils'
+export { GeneralButton } from './GeneralButton'

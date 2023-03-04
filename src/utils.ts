@@ -2,7 +2,7 @@ const labelRegex = /[A-Z]/;
 
 export function createLabel(
   nameVal: string,
-  labelVal: string | undefined,
+  labelVal: string | null = null,
 ): string {
   if (labelVal) return labelVal;
   let newLabel = nameVal[0].toUpperCase();
