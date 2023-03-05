@@ -7,9 +7,9 @@ interface GeneralButtonProps {
   };
   name: string;
   id: string;
-  onClick: (event: React.MouseEvent<HTMLButtonElement>) => {};
-  icon: JSX.Element;
-  disabled: boolean;
+  onClick: (event?: React.MouseEvent<HTMLButtonElement>) => void;
+  icon?: JSX.Element;
+  disabled?: boolean;
 }
 
 export function GeneralButton({ styles, name, id, onClick, icon, disabled }: GeneralButtonProps) {
@@ -28,4 +28,8 @@ export function GeneralButton({ styles, name, id, onClick, icon, disabled }: Gen
       {!icon ? createLabel(name) : icon}
     </button>
   );
+}
+
+GeneralButton.defaultProps = {
+  disabled: false
 }
