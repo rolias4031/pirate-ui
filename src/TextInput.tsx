@@ -7,7 +7,7 @@ export interface TextInputStyles {
   input?: string;
 }
 
-export interface TextInputProps<T extends Record<string, string>> {
+export interface TextInputProps<T extends Record<string & keyof T, string>> {
   name: string;
   id: string;
   curState: string;
@@ -18,7 +18,7 @@ export interface TextInputProps<T extends Record<string, string>> {
   disabled?: boolean;
 }
 
-export function TextInput<T extends Record<string, string>>({
+export function TextInput<T extends Record<string & keyof T, string>>({
   name,
   id,
   label,
