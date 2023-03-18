@@ -1,10 +1,8 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 import { InputLabel } from './InputLabel';
-import { TextInputProps } from './TextInput';
+import { TextInput, TextInputProps } from './TextInput';
 
-export interface TextInputWithLabelProps<
-  T extends Record<string & keyof T, string>,
-> extends TextInputProps<T> {
+export interface TextInputWithLabelProps extends TextInputProps {
   id: string;
   label?: string;
   styles?: {
@@ -15,7 +13,7 @@ export interface TextInputWithLabelProps<
   };
 }
 
-export function TextInput<T extends Record<string & keyof T, string>>({
+export function TextInputWithLabel({
   name,
   id,
   label,
@@ -24,16 +22,8 @@ export function TextInput<T extends Record<string & keyof T, string>>({
   curInput,
   raiseInput,
   isDisabled,
-  isInvalid,
-}: TextInputWithLabelProps<T>) {
-  function changeHandler(event: React.ChangeEvent<HTMLInputElement>): void {
-    event.preventDefault();
-    raiseInput((prevState: T) => ({
-      ...prevState,
-      [name]: event.target.value,
-    }));
-  }
-
+  isInvalid
+}: TextInputWithLabelProps) {
   return (
     <div className={styles?.div}>
       <InputLabel
@@ -51,7 +41,6 @@ export function TextInput<T extends Record<string & keyof T, string>>({
         curInput={curInput}
         raiseInput={raiseInput}
         styles={{
-          div: styles?.div,
           input: styles?.input,
           invalid: styles?.invalid,
         }}

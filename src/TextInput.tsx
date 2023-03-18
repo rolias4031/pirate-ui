@@ -1,11 +1,16 @@
-import React, { Dispatch, SetStateAction } from 'react';
-import cn from 'classnames'
+import React from 'react';
+import cn from 'classnames';
 
-export interface TextInputProps<T extends Record<string & keyof T, string>> {
+export interface RaiseInputArgs {
+  name: string;
+  input: string;
+}
+
+export interface TextInputProps {
   name: string;
   id?: string;
   curInput: string;
-  raiseInput: Dispatch<SetStateAction<T>>;
+  raiseInput: (payload: RaiseInputArgs) => void;
   placeholder?: string;
   styles?: {
     input?: string;
@@ -15,7 +20,7 @@ export interface TextInputProps<T extends Record<string & keyof T, string>> {
   isInvalid?: boolean;
 }
 
-export function TextInput<T extends Record<string & keyof T, string>>({
+export function TextInput({
   name,
   id,
   placeholder,
@@ -24,18 +29,18 @@ export function TextInput<T extends Record<string & keyof T, string>>({
   raiseInput,
   isDisabled,
   isInvalid,
-}: TextInputProps<T>) {
+}: TextInputProps) {
+
   function changeHandler(event: React.ChangeEvent<HTMLInputElement>): void {
-    raiseInput((prevState: T) => ({
-      ...prevState,
-      [name]: event.target.value,
-    }));
+    raiseInput({ name: event.target.name, input: event.target.value });
   }
 
   return (
     <input
       onChange={changeHandler}
-      className={cn(styles?.input, {[`${styles?.invalid}`]: isInvalid})}
+      className={cn(styles?.input, {
+        [`${styles?.invalid}`]: isInvalid
+      })}
       type="text"
       id={id}
       name={name}
