@@ -1,20 +1,28 @@
-import React from 'react';
-import { createLabel } from './utils';
+import React, { ReactNode } from 'react';
 
 interface GeneralButtonProps {
   styles?: {
     button?: string;
   };
-  name: string;
-  id: string;
-  onClick: (event?: React.MouseEvent<HTMLButtonElement>) => void;
-  icon?: JSX.Element;
+  name?: string;
+  id?: string;
+  onClick?: (event?: React.MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
+  children: ReactNode;
 }
 
-export function GeneralButton({ styles, name, id, onClick, icon, disabled }: GeneralButtonProps) {
+export function GeneralButton({
+  styles,
+  name,
+  id,
+  onClick,
+  disabled,
+  children,
+}: GeneralButtonProps) {
   function clickHandler(event: React.MouseEvent<HTMLButtonElement>) {
-    onClick(event);
+    if (onClick) {
+      onClick(event);
+    }
   }
   return (
     <button
@@ -25,11 +33,11 @@ export function GeneralButton({ styles, name, id, onClick, icon, disabled }: Gen
       className={styles?.button}
       disabled={disabled}
     >
-      {!icon ? createLabel(name) : icon}
+      {children}
     </button>
   );
 }
 
 GeneralButton.defaultProps = {
-  disabled: false
-}
+  disabled: false,
+};
