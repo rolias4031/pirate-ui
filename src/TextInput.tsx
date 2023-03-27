@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import cn from 'classnames';
 
 export interface RaiseInputArgs {
@@ -15,12 +15,14 @@ export interface TextInputProps {
   styles?: {
     input?: string;
     invalid?: string;
+    disabled?: string;
   };
   isDisabled?: boolean;
   isInvalid?: boolean;
+  onClick?: () => void
 }
 
-export function TextInput({
+export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(({
   name,
   id,
   placeholder,
@@ -29,7 +31,8 @@ export function TextInput({
   raiseInput,
   isDisabled,
   isInvalid,
-}: TextInputProps) {
+  onClick,
+}: TextInputProps, ref) => {
 
   function changeHandler(event: React.ChangeEvent<HTMLInputElement>): void {
     raiseInput({ name: event.target.name, input: event.target.value });
@@ -37,10 +40,13 @@ export function TextInput({
 
   return (
     <input
+      onClick={onClick}
       onChange={changeHandler}
       className={cn(styles?.input, {
-        [`${styles?.invalid}`]: isInvalid
+        [`${styles?.invalid}`]: isInvalid,
+        [`${styles?.disabled}`]: true,
       })}
+      ref={ref}
       type="text"
       id={id}
       name={name}
@@ -50,4 +56,4 @@ export function TextInput({
       autoComplete="off"
     />
   );
-}
+})
