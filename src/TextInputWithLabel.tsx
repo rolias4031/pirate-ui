@@ -19,10 +19,11 @@ export function TextInputWithLabel({
   label,
   placeholder,
   styles,
-  curInput,
-  raiseInput,
+  value,
+  onChange,
   isDisabled,
-  isInvalid
+  isInvalid,
+  isReadOnly
 }: TextInputWithLabelProps) {
   return (
     <div className={styles?.div}>
@@ -38,14 +39,15 @@ export function TextInputWithLabel({
         name={name}
         id={id}
         placeholder={placeholder}
-        curInput={curInput}
-        raiseInput={raiseInput}
+        value={value}
+        onChange={onChange}
         styles={{
           input: styles?.input,
           invalid: styles?.invalid,
         }}
         isDisabled={isDisabled}
         isInvalid={isInvalid}
+        isReadOnly={isReadOnly}
       />
     </div>
   );
